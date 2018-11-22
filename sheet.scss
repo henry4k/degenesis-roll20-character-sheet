@@ -1,0 +1,193 @@
+$box-width: 11px;
+$box-height: 16px;
+$box-gap: 2px;
+$radio-size: max($box-width, $box-height);
+// NOTE there is a minimum radio button size defined by the native UI
+$foreground: black;
+$highlight-color: red;
+$background: white;
+$icon-size: $box-height + 2px;
+
+@mixin font-icon
+{
+    font-size: $icon-size;
+    text-transform: none; // See .charsheet
+    //vertical-align: middle;
+    //text-align: center;
+}
+
+@font-face
+{
+    font-family: 'Tiers';
+    src: url('tiers.woff');
+}
+
+.charsheet
+{
+    background: $background;
+    line-height: initial;
+    font-family: 'Helvetica', sans-serif;
+    text-transform: uppercase;
+    min-width: 0; // TODO
+}
+
+.charsheet .sheet-degenesis
+{
+    // .sheet-degenesis is used to raise the specificness of custom rules.
+    // Roll20 rules tend to be quite specific and sometimes override custom
+    // sheet rules otherwise.
+
+    hr
+    {
+        border-top-color: $foreground;
+        margin: 0;
+    }
+
+
+    // Input elements:
+
+    button
+    {
+        // disable native button rendering:
+        border: none;
+        outline: none;
+        background: none;
+        text-align: initial;
+
+        // disable roll20 specific properties:
+        padding: 0;
+        margin: 0;
+        font: inherit;
+        text-transform: inherit;
+        text-shadow: none;
+        box-shadow: none;
+        &::before
+        {
+            content: none;
+        }
+
+        &[type="roll"]
+        {
+            padding: 0;
+            margin: 0;
+            font-size: inherit;
+
+            &::before
+            {
+                content: none;
+            }
+        }
+
+        &:hover
+        {
+            color: $highlight-color;
+        }
+    }
+
+    input,
+    select,
+    textarea
+    {
+        background: none;
+        background-color: beige;
+    }
+
+    input,
+    select
+    {
+        border: none;
+        color: inherit;
+    }
+
+    textarea
+    {
+        margin: 0;
+    }
+
+    // Remove spin buttons from number inputs:
+    input[type="number"]
+    {
+        -moz-appearance: textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button
+        {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        &:hover
+        {
+            -moz-appearance: initial;
+
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button
+            {
+                -webkit-appearance: inner-spin-button;
+                appearance: inner-spin-button;
+            }
+        }
+    }
+
+
+    // Repeating sections:
+
+    .repcontrol .btn
+    {
+        font-size: 0;
+    }
+
+    .repcontrol_add::before,
+    .repcontrol_edit::after
+    {
+        @include font-icon;
+        font-family: 'Pictos';
+    }
+
+    .repcontrol_add::before
+    {
+        content: '&';
+    }
+
+    .repcontrol_edit::after
+    {
+        content: '(';
+    }
+
+    .editmode ~ .repcontrol .repcontrol_edit::after
+    {
+        content: ')';
+    }
+
+
+    // General layout:
+
+    .sheet-block-container,
+    .sheet-table-container,
+    hr
+    {
+        margin-bottom: 22px;
+    }
+
+    @import "block.scss";
+    @import "box-bar.scss";
+    @import "table.scss";
+    @import "edit.scss";
+
+    .sheet-weapons
+    {
+        grid-template-columns: 2fr repeat(4, 1fr);
+
+        &.sheet-table-details
+        {
+            > :nth-child(1) { grid-column: span 2; }
+        }
+    }
+
+    input[name="attr_weapon-tech"]
+    {
+        font-family: 'Tiers';
+        font-size: 1.2em;
+        text-rendering: geometricPrecision;
+    }
+}

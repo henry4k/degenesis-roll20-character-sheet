@@ -1,0 +1,14 @@
+#!/usr/bin/env lua5.2
+local etlua = require'etlua'
+
+local function read_file(file_name)
+    local file = assert(io.open(file_name, 'r'))
+    local content = file:read'*a'
+    file:close()
+    return content
+end
+
+local template = read_file(arg[1])
+local env = {standalone = arg[2] == 'standalone'}
+local html = assert(etlua.render(template, env))
+io.stdout:write(html)

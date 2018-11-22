@@ -1,0 +1,48 @@
+.sheet-edit-placeholder,
+.sheet-edit,
+.sheet-edit + span,
+{
+    display: inline-block;
+    float: left;
+    width:  $radio-size;
+    min-height: 1px;
+    padding: 0;
+    margin: 0;
+}
+
+.sheet-edit
+{
+    height: 100%;
+
+    // Hide:
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+
+    & + span::before
+    {
+        @include font-icon;
+        font-family: 'Pictos';
+        //content: 'y'; // cog icon
+        content: 'p'; // pen icon
+        //content: 'W'; // write icon
+        color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:hover   + span::before,
+    &:checked + span::before
+    {
+        color: $foreground;
+    }
+
+    &:not(:checked) ~ * .sheet-show-while-editing
+    {
+        display: none;
+    }
+
+    &:checked ~ * .sheet-hide-while-editing
+    {
+        display: none;
+    }
+}

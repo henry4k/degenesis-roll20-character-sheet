@@ -1,0 +1,126 @@
+.sheet-box-bar
+{
+    display: inline-block;
+    line-height: 0;
+    position: relative; // Required so input sees this as its containing block.
+                        // See https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block
+
+    input, span
+    {
+        padding: 0;
+        margin: 0;
+    }
+
+    input
+    {
+        width:  $radio-size;
+        height: 100%;
+
+        // Hide:
+        position: absolute; // See .sheet-box-bar
+        opacity: 0;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    span
+    {
+        margin-left: $box-gap;
+        &:first-of-type
+        {
+            margin-left: none;
+        }
+
+        box-sizing: border-box;
+        width:  $box-width;
+        //height: $box-height;
+        height: 100%;
+
+        display: inline-block;
+        border-style: solid;
+        border-width: 1px;
+        border-color: $foreground;
+
+        background-color: $foreground;
+
+        // number:
+        vertical-align: top;
+        line-height: initial;
+        color: transparent;
+
+        &:hover
+        {
+            color: $background;
+        }
+    }
+
+    input:checked ~ input + span
+    {
+        background-color: initial;
+    }
+
+    input:hover + span
+    {
+        color: $background;
+    }
+
+    input:checked ~ input:hover + span
+    {
+        color: $foreground;
+    }
+
+    input[value="0"]
+    {
+        & + span
+        {
+            background-color: initial;
+            border-style: dashed;
+            opacity: 0.1;
+        }
+
+        &:hover + span
+        {
+            opacity: 1;
+        }
+    }
+
+    &.sheet-box-bar-limit
+    {
+        position: absolute;
+        z-index: 1;
+
+        input, span
+        {
+            display: none;
+        }
+
+        input:checked ~ input + span
+        {
+            display: inline-block;
+            background: $background;
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        input[value="0"]
+        {
+            & + span
+            {
+                display: none;
+            }
+        }
+    }
+}
+
+.sheet-box-bar-limit-group
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative; // Required so .sheet-box-bar-limit sees this as its containing block.
+                        // See https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block
+
+    > *
+    {
+        height: $box-height;
+    }
+}

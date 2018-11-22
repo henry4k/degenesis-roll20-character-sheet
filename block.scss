@@ -1,0 +1,103 @@
+$skill-width: 228px; // comes directly from the original character sheet
+$block-min-width: 200px;
+$block-max-width: 228px;
+
+.sheet-block-grid
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax($block-min-width, 1fr));
+    grid-gap: 22px;
+}
+
+.sheet-block-line
+{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-content: space-between;
+
+    > *
+    {
+        flex-grow: 1;
+        flex-shrink: 0;
+
+        margin-bottom: 22px;
+    }
+
+    > .sheet-line-container
+    {
+        flex-grow: 0;
+        flex-basis: $skill-width;
+    }
+}
+
+.sheet-state-container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    > * // state
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        > *:first-child
+        {
+            margin-bottom: 6px;
+        }
+    }
+}
+
+.sheet-line-container
+{
+    > * // line
+    {
+        display: flex;
+        //width: $skill-width;
+        height: $box-height;
+        padding-bottom: 6px;
+
+        > *
+        {
+            flex-grow: 0;
+            padding-left: $box-gap;
+
+            &:first-child
+            {
+                margin-left: $box-gap; // distance to ">"
+                flex-grow: 1;
+            }
+        }
+
+        &::before
+        {
+            content: ">";
+            font-family: monospace;
+            font-weight: bolder;
+            visibility: hidden;
+        }
+    }
+
+    > :first-child
+    {
+        padding-bottom: 15px;
+
+        > *
+        {
+            &:first-child
+            {
+                background-color: $foreground;
+                color: $background;
+                font-weight: bold;
+            }
+        }
+
+        &::before
+        {
+            visibility: visible;
+        }
+    }
+}
