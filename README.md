@@ -1,5 +1,7 @@
 # Degenesis character sheet for Roll20
 
+![](.screenshot.png)
+
 ## Development dependencies
 
 You need to have this software installed:
