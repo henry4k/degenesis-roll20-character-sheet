@@ -36,32 +36,23 @@ end
 
 --- Generate an attribute table.
 -- First pass the attribute name and then the skill names.
-function attribute(...)
-    local attribute_name = ...
+function attribute(attribute_name, ...)
 -%>
     <!-- <%- string.upper(attribute_name) %> -->
-    <div class="sheet-line-container">
+    <div class="sheet-list">
+        <div class="sheet-list-entry sheet-list-header">
+            <span><%= attribute_name %></span>
 <%
-    for name_index, name in ipairs{...} do
+    box_bar(attribute_name, 1, 6)
 -%>
-        <div>
+        </div>
 <%
-        -- the first argument is the attribute
-        local is_attribute = name_index == 1
-
-        local min_points = 0
-        if is_attribute then
-            min_points = 1
-        end
-
-        if is_attribute then
+    for _, skill_name in ipairs{...} do
 -%>
-            <span><%= name %></span>
+        <div class="sheet-list-entry">
 <%
-        else
-            roll_button(name, "")
-        end
-        box_bar(name, min_points, 6)
+        roll_button(skill_name, "") -- TODO: Create roll macro
+        box_bar(skill_name, 0, 6)
 -%>
         </div>
 <%
@@ -103,10 +94,12 @@ function repeating_section(name, inner_fn)
         for i = 1, 3 do
 -%>
         <div class="repitem">
+<!--
             <div class="itemcontrol">
                 <button class="btn btn-danger pictos repcontrol_del">#</button>
                 <a class="btn repcontrol_move">≡</a>
             </div>
+-->
 <%
             inner_fn()
 -%>
@@ -209,14 +202,14 @@ function sheet()
 <hr/>
 <div class="sheet-block-line">
     <!-- ORIGINS -->
-    <div class="sheet-line-container">
-        <div>
+    <div class="sheet-list">
+        <div class="sheet-list-entry sheet-list-header">
             <span>origins</span>
         </div>
 <%
 for _, name in ipairs{"allies", "authority", "network", "renown", "resources", "secrets"} do
 -%>
-        <div>
+        <div class="sheet-list-entry">
 <%
                 roll_button(name, "")
                 box_bar(name, 0, 6)
@@ -262,10 +255,28 @@ end
     </div>
 
     <!-- POTENTIALS -->
-    <div class="sheet-line-container">
-        <div>
+    <div class="sheet-list">
+        <div class="sheet-list-entry sheet-list-header">
             <span>potentials</span>
         </div>
+<%
+    repeating_section("potentials", function()
+-%>
+        <div class="sheet-list-entry">
+            <!--<input class="sheet-edit"
+                   type="checkbox"
+                   name="attr_weapon-edit"/><span></span>-->
+            <span>potential</span>
+<%
+            box_bar("potential-level", 1, 3)
+-%>
+            <!--<div class="sheet-show-while-editing">
+                <textarea name="attr_potential-description"></textarea>
+            </div>-->
+        </div>
+<%
+    end) -- potentials repeating section
+-%>
     </div>
 </div>
 <!-- WEAPONS -->
@@ -273,7 +284,7 @@ end
     <div class="sheet-table-entry">
         <span class="sheet-edit-placeholder"></span>
         <span class="sheet-table-content">
-            <span class="sheet-table-line sheet-weapons">
+            <span class="sheet-table-line sheet-table-header sheet-weapons">
                 <span>weapons</span>
                 <span>handling</span>
                 <span>distance</span>
@@ -283,7 +294,7 @@ end
         </span>
     </div>
 <%
-    repeating_section('weapons', function()
+    repeating_section("weapons", function()
 -%>
         <div class="sheet-table-entry">
             <input class="sheet-edit"
@@ -360,14 +371,14 @@ end
                     </span>
                 </span>
                 <div class="sheet-table-details sheet-show-while-editing">
-                    <span class="sheet-table-line sheet-weapons">
-                        <span>properties</span>
+                    <span class="sheet-table-line sheet-table-header sheet-weapons">
+                        <span>description</span>
                         <span><span>weight</span></span>
                         <span>tech</span>
                         <span>slots</span>
                     </span>
                     <span class="sheet-table-line sheet-weapons">
-                        <textarea name="attr_weapon-properties"></textarea>
+                        <textarea name="attr_weapon-description"></textarea>
 
                         <input type="number" name="attr_weapon-weight"/>
 
@@ -390,7 +401,7 @@ end
             </span>
         </div>
 <%
-    end)
+    end) -- weapons repeating section
 -%>
 </div>
 </div><!-- WRAPPER END -->
@@ -409,7 +420,7 @@ roll_templates.attack = function()
     {{attack}} <!-- near/far/extreme ? -->
     {{damage}}
 
-    {{properties}}
+    {{description}}
 <%
 end -- roll_template.attack
 

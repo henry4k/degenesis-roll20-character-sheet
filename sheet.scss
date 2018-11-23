@@ -90,6 +90,7 @@ $icon-size: $box-height + 2px;
     {
         background: none;
         background-color: beige;
+        margin: 0;
     }
 
     input,
@@ -97,11 +98,6 @@ $icon-size: $box-height + 2px;
     {
         border: none;
         color: inherit;
-    }
-
-    textarea
-    {
-        margin: 0;
     }
 
     // Remove spin buttons from number inputs:

@@ -14,23 +14,24 @@
     flex-direction: column;
 }
 
-.sheet-table-entry,
 .sheet-table-line
 {
     border-top-style: solid;
     border-top-width: 1px;
     border-top-color: $foreground;
+}
 
-    &:first-child
-    {
-        border-top-style: none;
-    }
+.sheet-table-header
+{
+    border-top-style: none;
+    font-size: 0.9em;
 }
 
 .sheet-table-line
 {
     display: grid;
-    align-items: start;
+    align-items: stretch;
+    min-height: 1em;
 
     input, textarea, select
     {
@@ -80,6 +81,7 @@
     > .inline
     {
         display: inline;
+        align-content: baseline;
 
         *
         {

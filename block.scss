@@ -24,7 +24,7 @@ $block-max-width: 228px;
         margin-bottom: 22px;
     }
 
-    > .sheet-line-container
+    > .sheet-list
     {
         flex-grow: 0;
         flex-basis: $skill-width;
@@ -51,10 +51,11 @@ $block-max-width: 228px;
     }
 }
 
-.sheet-line-container
+.sheet-list
 {
-    > * // line
+    .sheet-list-entry
     {
+        //display: inline;
         display: flex;
         //width: $skill-width;
         height: $box-height;
@@ -81,7 +82,7 @@ $block-max-width: 228px;
         }
     }
 
-    > :first-child
+    .sheet-list-header
     {
         padding-bottom: 15px;
 
