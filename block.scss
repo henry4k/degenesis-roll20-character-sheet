@@ -24,7 +24,8 @@ $block-max-width: 228px;
         margin-bottom: 22px;
     }
 
-    > .sheet-list
+    > .sheet-list,
+    > .sheet-list2,
     {
         flex-grow: 0;
         flex-basis: $skill-width;
@@ -35,7 +36,6 @@ $block-max-width: 228px;
 {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
 
     > * // state
@@ -43,6 +43,12 @@ $block-max-width: 228px;
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 12px;
+
+        &:last-child
+        {
+            margin-bottom: 0;
+        }
 
         > *:first-child
         {
@@ -51,12 +57,84 @@ $block-max-width: 228px;
     }
 }
 
+.sheet-list2
+{
+    display: flex;
+
+    > *
+    {
+        flex-grow: 1;
+    }
+
+    &::before
+    {
+        content: ">";
+        font-family: monospace;
+        font-weight: bolder;
+        margin-right: $box-gap;
+        flex-grow: 0;
+    }
+
+    textarea,
+    input[type="text"],
+    input[type="number"]
+    {
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    textarea
+    {
+        min-height: 2em;
+        resize: vertical;
+    }
+
+    .sheet-list-entry
+    {
+        padding-bottom: 6px;
+
+        display: grid;
+        grid-gap: 6px;
+
+        position: relative; // Required so absolute positioned elements see this as its containing block.
+                            // See https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block
+    }
+
+    .sheet-list-line
+    {
+        display: flex;
+
+        > *
+        {
+            flex-grow: 0;
+            padding-left: $box-gap;
+
+            &.sheet-list-fill
+            {
+                flex-grow: 1;
+            }
+        }
+    }
+
+    .sheet-list-header-entry
+    {
+        padding-bottom: 15px;
+
+        .sheet-label
+        {
+            background-color: $foreground;
+            color: $background;
+            font-weight: bold;
+        }
+    }
+}
+
 .sheet-list
 {
     .sheet-list-entry
     {
-        //display: inline;
         display: flex;
+        flex-wrap: wrap; // TODO: Changes height somehow.
         //width: $skill-width;
         height: $box-height;
         padding-bottom: 6px;
@@ -69,6 +147,10 @@ $block-max-width: 228px;
             &:first-child
             {
                 margin-left: $box-gap; // distance to ">"
+            }
+
+            &.sheet-list-fill
+            {
                 flex-grow: 1;
             }
         }

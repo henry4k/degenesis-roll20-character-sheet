@@ -1,10 +1,12 @@
+$edit-size: $radio-size;
+
 .sheet-edit-placeholder,
 .sheet-edit,
 .sheet-edit + span,
 {
     display: inline-block;
     float: left;
-    width:  $radio-size;
+    width:  $edit-size;
     min-height: 1px;
     padding: 0;
     margin: 0;
@@ -12,8 +14,6 @@
 
 .sheet-edit
 {
-    height: 100%;
-
     // Hide:
     position: absolute;
     left: 0;
@@ -27,22 +27,31 @@
         //content: 'y'; // cog icon
         content: 'p'; // pen icon
         //content: 'W'; // write icon
-        color: rgba(0, 0, 0, 0.1);
+        opacity: $hidden-opacity;
     }
 
     &:hover   + span::before,
     &:checked + span::before
     {
-        color: $foreground;
+        opacity: 1;
     }
 
+    &:not(:checked) ~ .sheet-show-while-editing,
     &:not(:checked) ~ * .sheet-show-while-editing
     {
         display: none;
     }
 
+    &:checked ~ .sheet-hide-while-editing,
     &:checked ~ * .sheet-hide-while-editing
     {
         display: none;
     }
+}
+
+.sheet-edit.sheet-edit-outside,
+.sheet-edit.sheet-edit-outside + span
+{
+    position: absolute;
+    left: -$edit-size;
 }

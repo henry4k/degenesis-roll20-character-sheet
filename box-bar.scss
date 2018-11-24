@@ -2,6 +2,7 @@
 {
     display: inline-block;
     line-height: 0;
+    height: $box-height;
     position: relative; // Required so input sees this as its containing block.
                         // See https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#Identifying_the_containing_block
 
@@ -75,7 +76,7 @@
         {
             background-color: initial;
             border-style: dashed;
-            opacity: 0.1;
+            opacity: $hidden-opacity;
         }
 
         &:hover + span
@@ -98,7 +99,7 @@
         {
             display: inline-block;
             background: $background;
-            border-color: rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, $hidden-opacity);
         }
 
         input[value="0"]

@@ -6,6 +6,10 @@
 
 .sheet-table-entry
 {
+    > .sheet-edit
+    {
+        height: 100%;
+    }
 }
 
 .sheet-table-content
@@ -21,22 +25,22 @@
     border-top-color: $foreground;
 }
 
-.sheet-table-header
-{
-    border-top-style: none;
-    font-size: 0.9em;
-}
-
 .sheet-table-line
 {
     display: grid;
     align-items: stretch;
-    min-height: 1em;
+    min-height: 2em;
+
+    &.sheet-table-header
+    {
+        min-height: 1em;
+        border-top-style: none;
+        font-size: 0.9em;
+    }
 
     input, textarea, select
     {
         width: 100%;
-        overflow-x: hidden;
         margin-left:   0;
         margin-right:  0;
         padding-left:  0;
@@ -78,7 +82,7 @@
         }
     }
 
-    > .inline
+    > .sheet-inline
     {
         display: inline;
         align-content: baseline;

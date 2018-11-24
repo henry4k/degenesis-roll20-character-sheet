@@ -7,6 +7,7 @@ $foreground: black;
 $highlight-color: red;
 $background: white;
 $icon-size: $box-height + 2px;
+$hidden-opacity: 0.1;
 
 @mixin font-icon
 {
@@ -45,6 +46,11 @@ $icon-size: $box-height + 2px;
 
 
     // Input elements:
+
+    .sheet-user-text // e.g. for attribute-backed spans
+    {
+        text-transform: initial;
+    }
 
     button
     {
@@ -91,11 +97,7 @@ $icon-size: $box-height + 2px;
         background: none;
         background-color: beige;
         margin: 0;
-    }
 
-    input,
-    select
-    {
         border: none;
         color: inherit;
     }
@@ -131,6 +133,13 @@ $icon-size: $box-height + 2px;
     .repcontrol .btn
     {
         font-size: 0;
+        opacity: $hidden-opacity;
+
+        &:hover
+        {
+            opacity: 1;
+            color: inherit; // default is $highlight-color
+        }
     }
 
     .repcontrol_add::before,
