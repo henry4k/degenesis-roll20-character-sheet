@@ -57,7 +57,7 @@ $block-max-width: 228px;
     }
 }
 
-.sheet-list2
+.sheet-list
 {
     display: flex;
 
@@ -125,62 +125,6 @@ $block-max-width: 228px;
             background-color: $foreground;
             color: $background;
             font-weight: bold;
-        }
-    }
-}
-
-.sheet-list
-{
-    .sheet-list-entry
-    {
-        display: flex;
-        flex-wrap: wrap; // TODO: Changes height somehow.
-        //width: $skill-width;
-        height: $box-height;
-        padding-bottom: 6px;
-
-        > *
-        {
-            flex-grow: 0;
-            padding-left: $box-gap;
-
-            &:first-child
-            {
-                margin-left: $box-gap; // distance to ">"
-            }
-
-            &.sheet-list-fill
-            {
-                flex-grow: 1;
-            }
-        }
-
-        &::before
-        {
-            content: ">";
-            font-family: monospace;
-            font-weight: bolder;
-            visibility: hidden;
-        }
-    }
-
-    .sheet-list-header
-    {
-        padding-bottom: 15px;
-
-        > *
-        {
-            &:first-child
-            {
-                background-color: $foreground;
-                color: $background;
-                font-weight: bold;
-            }
-        }
-
-        &::before
-        {
-            visibility: visible;
         }
     }
 }

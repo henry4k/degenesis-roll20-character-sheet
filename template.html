@@ -44,24 +44,30 @@ function attribute(attribute_name, ...)
 -%>
     <!-- <%- string.upper(attribute_name) %> -->
     <div class="sheet-list">
-        <div class="sheet-list-entry sheet-list-header">
-            <span class="sheet-list-fill"><%= attribute_name %></span>
+        <div>
+            <div class="sheet-list-entry sheet-list-header-entry">
+                <span class="sheet-list-line">
+                    <span class="sheet-list-fill sheet-label"><%= attribute_name %></span>
 <%
     box_bar(attribute_name, 1, 6)
 -%>
-        </div>
+                </span>
+            </div>
 <%
     for _, skill_name in ipairs{...} do
 -%>
-        <div class="sheet-list-entry">
+            <div class="sheet-list-entry">
+                <span class="sheet-list-line">
 <%
         roll_button(skill_name, "", "sheet-list-fill") -- TODO: Create roll macro
         box_bar(skill_name, 0, 6)
 -%>
-        </div>
+                </span>
+            </div>
 <%
     end
 -%>
+        </div>
     </div>
 <%
 end
@@ -207,21 +213,27 @@ function sheet()
 <div class="sheet-block-line">
     <!-- ORIGINS -->
     <div class="sheet-list">
-        <div class="sheet-list-entry sheet-list-header">
-            <span class="sheet-list-fill">origins</span>
-        </div>
+        <div>
+            <div class="sheet-list-entry sheet-list-header-entry">
+                <span class="sheet-list-line">
+                    <span class="sheet-list-fill sheet-label">origins</span>
+                </span>
+            </div>
 <%
 for _, name in ipairs{"allies", "authority", "network", "renown", "resources", "secrets"} do
 -%>
-        <div class="sheet-list-entry">
+            <div class="sheet-list-entry">
+                <span class="sheet-list-line">
 <%
-                roll_button(name, "", "sheet-list-fill")
-                box_bar(name, 0, 6)
+    roll_button(name, "", "sheet-list-fill")
+    box_bar(name, 0, 6)
 -%>
-        </div>
+                </span>
+            </div>
 <%
 end
 -%>
+        </div>
     </div>
 
     <div class="sheet-state-container">
@@ -259,40 +271,40 @@ end
     </div>
 
     <!-- POTENTIALS -->
-    <div class="sheet-list2">
+    <div class="sheet-list">
         <div>
-        <div class="sheet-list-entry sheet-list-header-entry">
-            <span class="sheet-list-line">
-                <span class="sheet-list-fill sheet-label">potentials</span>
-            </span>
-        </div>
+            <div class="sheet-list-entry sheet-list-header-entry">
+                <span class="sheet-list-line">
+                    <span class="sheet-list-fill sheet-label">potentials</span>
+                </span>
+            </div>
 <%
     repeating_section("potentials", function()
 -%>
-        <div class="sheet-list-entry">
-            <input class="sheet-edit sheet-edit-outside"
-                   type="checkbox"
-                   name="attr_potential-edit"/><span></span>
-            <span class="sheet-list-line">
-                <span class="sheet-list-fill">
-                    <span class="sheet-user-text sheet-hide-while-editing"
-                          name="attr_potential-name"></span>
-                    <input class="sheet-show-while-editing"
-                           type="text"
-                           name="attr_potential-name"
-                           placeholder="name"/>
-                </span>
+            <div class="sheet-list-entry">
+                <input class="sheet-edit sheet-edit-outside"
+                    type="checkbox"
+                    name="attr_potential-edit"/><span></span>
+                <span class="sheet-list-line">
+                    <span class="sheet-list-fill">
+                        <span class="sheet-user-text sheet-hide-while-editing"
+                            name="attr_potential-name"></span>
+                        <input class="sheet-show-while-editing"
+                            type="text"
+                            name="attr_potential-name"
+                            placeholder="name"/>
+                    </span>
 <%
         box_bar("potential-level", 1, 3)
 -%>
-            </span>
-            <span class="sheet-list-line sheet-show-while-editing">
-                <span class="sheet-list-fill">
-                    <textarea name="attr_potential-description"
-                              placeholder="description"></textarea>
                 </span>
-            </span>
-        </div>
+                <span class="sheet-list-line sheet-show-while-editing">
+                    <span class="sheet-list-fill">
+                        <textarea name="attr_potential-description"
+                                placeholder="description"></textarea>
+                    </span>
+                </span>
+            </div>
 <%
     end) -- potentials repeating section
 -%>
